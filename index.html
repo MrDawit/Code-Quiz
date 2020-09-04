@@ -3,40 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--to make sure there are no conflict issues yet
+  
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery.js"></script> -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css"/>
     <title>Code Quiz</title>
 </head>
 <body>
     <h1>Uconn Coding Bootcamp: Code Quiz</h1>
-        <alt>
-        <h2>Instructions:</h2>
-    <ol>
-        <li></li>
-        <li></li>
-    </ol>     
-        </alt>       
+        <aside>
+            <h2>Instructions:</h2>
+            <ul>
+                <li>Answers are case-sensitive.<span> Answer </span>in proper noun form.</li>
+                <!-- <li>Choose <span>best </span>answer from selected choices</li> -->
+                <li>Finish quiz before <span>timer </span>reaches 0.</li>
+                <li>Then see what <span>Kobe </span>does to the rim.</li>
+            </ul>     
+        </aside>       
             
         
-    <main>
-        <button class="button">Start</button>
-    </main>
-    <footer>
-
-    </footer>
+        <main>
+            <div>
+                <button class="button">Start</button>
+            </div>    
+            <div id="time"></div>
+        </main>
+        <footer>
+            <!--put score here-->
+        </footer>
     <script>
         $(document).ready( function() {
 
             var btn=document.querySelector(".button");
-            btn.addEventListener("click", timer);
+            btn.addEventListener("click",function(){
+                timer();
+                quiz();
+        });
             function timer(){
-
+                var timeleft = 15;
+                var clock = setInterval(function(){
+                timeleft--;
+                alert(timeleft);
+                //document.getElementById("time").textContent = timeleft;
+                if(timeleft <= 0)
+                    clearInterval(clock);
+                },500);
             }
             function quiz(){
-                var quest1=prompt("What is the first line of an html5 page?");
-                var quest2=confirm("Should you run a javascript file close to the top of the body of an html file?");
-                
+                var quest4=prompt("Who scored 60-plus points in a game six times?");
+                var quest2=prompt("Lakers’ career leader in games, minutes, points, field goals made and attempted, 3-pointers made and attempted, free throws made and attempted, and win shares?");
+                var quest3=prompt("Who is the only NBA player to have two jerseys retired by the same team?");
+                var quest5=prompt("Who has 12-time All-Defensive team selections?");
+                var quest1=prompt("Who is a 5 time NBA Champion?");
             }
 
         });

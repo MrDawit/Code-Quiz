@@ -1,0 +1,21 @@
+body{
+    background-color:purple;
+}
+h1{
+    text-decoration:underline;
+}
+span{
+    color:gold;
+    text-decoration:bold ;
+}
+aside{
+    color:white;
+}
+div{
+    float:left;
+}
+#time{
+    float:right;
+    color:red;
+    font-size:40px;
+}
