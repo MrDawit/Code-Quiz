@@ -17,47 +17,202 @@
                 <li>Answers are case-sensitive.<span> Answer </span>in proper noun form.</li>
                 <!-- <li>Choose <span>best </span>answer from selected choices</li> -->
                 <li>Finish quiz before <span>timer </span>reaches 0.</li>
-                <li>Then see what <span>Kobe </span>does to the rim.</li>
+                <li>Then see what <span>This NBA great </span>does to the rim.</li>
             </ul>     
         </aside>       
             
         
-        <main>
-            <div>
+        <main id="main">
+            <section>
                 <button class="button">Start</button>
-            </div>    
-            <div id="time"></div>
+            </section>    
+            <section id="title">Quiz</section>
+            <section id="question">Question</section></br></br>
+            <section id="time"></section>
+            
+            <form id="quiz-form" method="POST">
+                
+                <label for="answerT">Input Answer:</label></br>
+                <input type="text" placeholder="Who can this be?" name="answer" id="answer-text" /></br></br>
+              </form>
+
+
         </main>
         <footer>
             <!--put score here-->
         </footer>
-    <script>
-        $(document).ready( function() {
+    <!-- <script> 
 
-            var btn=document.querySelector(".button");
-            btn.addEventListener("click",function(){
-                timer();
-                quiz();
-        });
-            function timer(){
-                var timeleft = 15;
+
+var points=24;
+            var answerInput = document.querySelector("#answer-text").value;
+
+            
+var quizForm = document.querySelector("#quiz-form");
+
+var question=document.querySelector("#question");
+           
+var quest = [
+    "Who scored 60-plus points in a game six times?",
+    "Lakers’ career leader in games, minutes, points, field goals made and attempted, 3-pointers made and attempted, free throws made and attempted, and win shares?",
+    "Who is the only NBA player to have two jerseys retired by the same team?",
+    "Who has 12-time All-Defensive team selections?",
+    "Who is a 5 time NBA Champion?"
+    ];
+           
+           
+var answer="Kobe";
+           
+var btn=document.querySelector(".button");        
+        
+        
+    
+       quiz();   
+           
+        function quiz(){
+
+                    var points=25;
+
+                 
+                   btn.addEventListener("click",function(){
+                                for(var i=0; i<quest.length; i++){
+                                    Now=quest[i];
+                                    
+                                    document.querySelector("#quiz-form").addEventListener("submit", function(event) {
+                                        event.preventDefault();
+                                        points=100;
+                                        console.log(34);
+                        
+                                        var points=27;
+                                    // When form is submitted...
+                                        if (answerInput === answer) {
+                                        
+                                        console.log(points);
+                                         points=81;
+                                        }; 
+                                       
+                   
+                                    });
+                                };
+                        
+                                    var points=26;
+                                    question.innerHTML=Now
+                                    timer();
+                    });
+        };
+                   
+        function timer(){
+                var timeleft = 30;
                 var clock = setInterval(function(){
                 timeleft--;
-                alert(timeleft);
-                //document.getElementById("time").textContent = timeleft;
+                document.getElementById("time").textContent = timeleft;
                 if(timeleft <= 0)
                     clearInterval(clock);
                 },500);
-            }
-            function quiz(){
-                var quest4=prompt("Who scored 60-plus points in a game six times?");
-                var quest2=prompt("Lakers’ career leader in games, minutes, points, field goals made and attempted, 3-pointers made and attempted, free throws made and attempted, and win shares?");
-                var quest3=prompt("Who is the only NBA player to have two jerseys retired by the same team?");
-                var quest5=prompt("Who has 12-time All-Defensive team selections?");
-                var quest1=prompt("Who is a 5 time NBA Champion?");
-            }
+            };
+            
+                   
+                   
+                   
+                   
+                   
+                   
+                      // Return from function early if submitted answerInput is blank
+                    
+                      
+                   
+                   
+                   
+                   
+                      // Add new answerInput to quest array, clear the input
+                     // quest.push(answerInput);
+                      //todoInput.value = "";
+                   
+                      // Re-render the list
+                     // renderquest();
+         
+                 
+
+        // btn.addEventListener("click",function(){
+        //   timer();
+        //     quiz;
+        // });
+           
+    </script>-->
+
+
+    <script>
+var answerInput = document.querySelector("#answer-text");       
+var quizForm = document.querySelector("#quiz-form");
+var question=document.querySelector("#question");           
+var quest = [
+    "1.) Who scored 60-plus points in a game six times?",
+    "2.) Lakers’ career leader in games, minutes, points, field goals made and attempted, 3-pointers made and attempted, free throws made and attempted, and win shares?",
+    "3.) Who is the only NBA player to have two jerseys retired by the same team?",
+    "4.) Who has 12-time All-Defensive team selections?",
+    "5.) Who is a 5 time NBA Champion?"
+    ];
+var answer="Kobe";           
+var btn=document.querySelector(".button");   
+var ans;
+var points=0;
+var i=1;
+    btn.addEventListener("click",function(){
+        question.innerHTML=quest[0];
+        timer();
+        quizForm.addEventListener("submit", function(event) {
+          event.preventDefault();
+        
+          var answerText = answerInput.value;
+        
+          // Return from function early if submitted todoText is blank
+          if (answerText === "") {
+            return;
+          }
+      
+          // Add new todoText to todos array, clear the input
+          ans=answerText;
+          answerText = "";
+      
+          // Re-render the list
+          console.log(ans);
+        
+          if(ans===answer && i<quest.length+1){
+              points++;
+              question.innerHTML=quest[i++];
+              console.log(points);
+              console.log(i);
+              answerInput.value =""; 
+             
+          }
+
+          if(ans!==answer && i<quest.length+1){
+              question.innerHTML=quest[i++];
+              console.log(points);
+              answerInput.value="";
+
+           }   
+          else if(i>5){
+              console.log("not happy");
+              //document.main.innerHTML="";
+
+          }  
+              
+      
 
         });
+
+        function timer(){
+                        var timeleft = 30;
+                        var clock = setInterval(function(){
+                        timeleft--;
+                        document.getElementById("time").textContent = timeleft;
+                        if(timeleft <= 0)
+                            clearInterval(clock);
+                        },500);
+                    };
+        
+    });
     </script>
 </body>
 </html>

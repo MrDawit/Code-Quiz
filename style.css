@@ -19,3 +19,16 @@ div{
     color:red;
     font-size:40px;
 }
+#title{
+    text-align: center;
+     font-size:18px;
+}
+
+#question{
+    text-align: center;
+   /* display: inline-block; */
+    font-size:18px;
+}
+form{
+    text-align:center;
+}
