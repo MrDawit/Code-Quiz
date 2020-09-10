@@ -10,7 +10,7 @@
     <title>Code Quiz</title>
 </head>
 <body>
-    <h1>Uconn Coding Bootcamp: Code Quiz</h1>
+    <h1>Code Quiz: Basketball</h1>
         <aside>
             <h2>Instructions:</h2>
             <ul>
@@ -23,7 +23,7 @@
             
         
         <main id="main">
-            <section>
+            <section id="button">
                 <button class="button">Start</button>
             </section>    
             <section id="title">Quiz</section>
@@ -34,9 +34,10 @@
                 
                 <label for="answerT">Input Answer:</label></br>
                 <input type="text" placeholder="Who can this be?" name="answer" id="answer-text" /></br></br>
-              </form>
-
-
+            </form>
+            
+            <section><img alt="Kobe_Yao" id="gif" style="visibility:hidden"/></section>
+            <br><br><br>
         </main>
         <footer>
             <!--put score here-->
@@ -142,9 +143,24 @@ var btn=document.querySelector(".button");
 
 
     <script>
+var Aside= document.querySelector("aside");
+var P = document.createElement("p");                     
+var text = document.createTextNode("Game Over!!");
+var Main=document.getElementById("main");
+
+var BTN= document.querySelector("#button");
+var Title= document.querySelector("#title");
 var answerInput = document.querySelector("#answer-text");       
 var quizForm = document.querySelector("#quiz-form");
-var question=document.querySelector("#question");           
+var question=document.querySelector("#question");   
+var GIF=document.querySelector("#gif");        
+var answer="Kobe";           
+var btn=document.querySelector(".button");   
+var ans;
+var game=true;
+var points=0;
+var timeleft = 60;
+var i=1;
 var quest = [
     "1.) Who scored 60-plus points in a game six times?",
     "2.) Lakers’ career leader in games, minutes, points, field goals made and attempted, 3-pointers made and attempted, free throws made and attempted, and win shares?",
@@ -152,11 +168,17 @@ var quest = [
     "4.) Who has 12-time All-Defensive team selections?",
     "5.) Who is a 5 time NBA Champion?"
     ];
-var answer="Kobe";           
-var btn=document.querySelector(".button");   
-var ans;
-var points=0;
-var i=1;
+
+var Kobe_dunk=["./images/0.gif","./images/1.gif","./images/2.gif","./images/3.gif","./images/4.gif","./images/5.gif","./images/6.gif","./images/7.gif",".images/8.gif","./images/9.gif","./images/10.gif",
+                "./images/11.gif","./images/12.gif","./images/13.gif","./images/14.gif","./images/15.gif","./images/16.gif","./images/17.gif","./images/18.gif","./images/19.gif","./images/20.gif",
+                "./images/21.gif","./images/22.gif","./images/23.gif","./images/24.gif","./images/25.gif","./images/26.gif","./images/27.gif","./images/28.gif","./images/29.gif","./images/30.gif",
+                "./images/31.gif","./images/32.gif","./images/33.gif","./images/34.gif","./images/35.gif","./images/36.gif","./images/37.gif","./images/38.gif","./images/39.gif","./images/40.gif",
+                "./images/41.gif","./images/42.gif","./images/43.gif","./images/44.gif","./images/45.gif","./images/46.gif","./images/47.gif","./images/48.gif","./images/49.gif","./images/50.gif",
+                "./images/51.gif","./images/52.gif","./images/53.gif","./images/54.gif","./images/55.gif"
+            ];
+
+
+            
     btn.addEventListener("click",function(){
         question.innerHTML=quest[0];
         timer();
@@ -164,37 +186,61 @@ var i=1;
           event.preventDefault();
         
           var answerText = answerInput.value;
-        
-          // Return from function early if submitted todoText is blank
+          
+          // Return from function early if submitted text is blank
           if (answerText === "") {
             return;
           }
       
-          // Add new todoText to todos array, clear the input
+          // Add new value to var ans. clear the input
           ans=answerText;
           answerText = "";
       
-          // Re-render the list
-          console.log(ans);
+          
+          console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
         
-          if(ans===answer && i<quest.length+1){
+
+        //   for(a=0;a<10;a++){
+        //           (function(a){
+        //           setInterval(function(){
+        //         GIF.setAttribute("src",Kobe_dunk[a]);
+        //         GIF.style.visibility="visible";
+        //         console.log("a="+ a);
+        //           },200)
+        //           })(a);
+        //     };
+          
+          if(ans===answer && i<quest.length){
               points++;
               question.innerHTML=quest[i++];
-              console.log(points);
-              console.log(i);
+              console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
               answerInput.value =""; 
-             
+           
+              
+            
           }
 
-          if(ans!==answer && i<quest.length+1){
+          else if(ans!==answer && i<quest.length){
               question.innerHTML=quest[i++];
-              console.log(points);
+              
               answerInput.value="";
-
+              timeleft=timeleft-5;
+           
+           console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
            }   
-          else if(i>5){
-              console.log("not happy");
-              //document.main.innerHTML="";
+          else if(i>=quest.length){
+              //console.log("not happy");
+              //could create array of elements and replace code with "for" loop
+            Aside.innerHTML="";
+            quizForm.innerHTML="";
+            BTN.innerHTML="";
+            Title.innerHTML="";
+            question.innerHTML="";     
+            P.appendChild(text);
+            Main.appendChild(P); 
+            game=false;
+
+            console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
 
           }  
               
@@ -203,14 +249,15 @@ var i=1;
         });
 
         function timer(){
-                        var timeleft = 30;
+                       
                         var clock = setInterval(function(){
                         timeleft--;
-                        document.getElementById("time").textContent = timeleft;
-                        if(timeleft <= 0)
+                        document.getElementById("time").textContent = "Time: "+ timeleft + " Sec";
+                        
+                        if(timeleft <= 0|| game!=true)
                             clearInterval(clock);
-                        },500);
-                    };
+                        },1000);
+        };
         
     });
     </script>
