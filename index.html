@@ -158,7 +158,9 @@ var answer="Kobe";
 var btn=document.querySelector(".button");   
 var ans;
 var game=true;
+var time=true;
 var points=0;
+//Gametime(seconds)
 var timeleft = 60;
 var i=1;
 var quest = [
@@ -178,10 +180,11 @@ var Kobe_dunk=["./images/0.gif","./images/1.gif","./images/2.gif","./images/3.gi
             ];
 
 
-            
+     //Game start click       
     btn.addEventListener("click",function(){
         question.innerHTML=quest[0];
         timer();
+        //when answer is submitted(clicked)
         quizForm.addEventListener("submit", function(event) {
           event.preventDefault();
         
@@ -200,26 +203,84 @@ var Kobe_dunk=["./images/0.gif","./images/1.gif","./images/2.gif","./images/3.gi
           console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
         
 
-        //   for(a=0;a<10;a++){
-        //           (function(a){
-        //           setInterval(function(){
-        //         GIF.setAttribute("src",Kobe_dunk[a]);
-        //         GIF.style.visibility="visible";
-        //         console.log("a="+ a);
-        //           },200)
-        //           })(a);
-        //     };
           
-          if(ans===answer && i<quest.length){
-              points++;
-              question.innerHTML=quest[i++];
-              console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
-              answerInput.value =""; 
-           
-              
-            
-          }
+          
+          //Correct answer
+            if(ans===answer && i<quest.length){
+                points++;
+                question.innerHTML=quest[i++];
+                console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
+                answerInput.value =""; 
+             
 
+
+                            if(i=1){
+                             for(a=0;a<10;a++){
+                                 (function(a){
+                                 setInterval(function(){
+                               GIF.setAttribute("src",Kobe_dunk[a]);
+                               GIF.style.visibility="visible";
+                               console.log("a="+ a);
+                                 },500)
+                                 })(a);
+                             }
+                         
+                             if(i=2){
+                                for(a=10;a<20;a++){
+                                 (function(a){
+                                 setInterval(function(){
+                               GIF.setAttribute("src",Kobe_dunk[a]);
+                               GIF.style.visibility="visible";
+                               console.log("a="+ a);
+                                 },500)
+                                 })(a);
+                             }
+                         
+                             if(i=3){
+                                for(a=20;a<30;a++){
+                                 (function(a){
+                                 setInterval(function(){
+                               GIF.setAttribute("src",Kobe_dunk[a]);
+                               GIF.style.visibility="visible";
+                               console.log("a="+ a);
+                                 },500)
+                                 })(a);
+                             }
+                         
+                             if(i=4){
+                                 for(a=30;a<40;a++){
+                                 (function(a){
+                                 setInterval(function(){
+                               GIF.setAttribute("src",Kobe_dunk[a]);
+                               GIF.style.visibility="visible";
+                               console.log("a="+ a);
+                                 },500)
+                                 })(a);
+                             }
+                         
+                             if(i=5){
+                                for(a=40;a<50;a++){
+                                 (function(a){
+                                 setInterval(function(){
+                               GIF.setAttribute("src",Kobe_dunk[a]);
+                               GIF.style.visibility="visible";
+                               console.log("a="+ a);
+                                 },500)
+                                 })(a);
+                             }
+                            //   if(i=6){
+                            //   for(a=50;a<56;a++){
+                            //       (function(a){
+                            //       setInterval(function(){
+                            //     GIF.setAttribute("src",Kobe_dunk[a]);
+                            //     GIF.style.visibility="visible";
+                            //     console.log("a="+ a);
+                            //       },500)
+                            //       })(a);
+                            //   }
+            }
+
+          //Wrong answer
           else if(ans!==answer && i<quest.length){
               question.innerHTML=quest[i++];
               
@@ -228,56 +289,57 @@ var Kobe_dunk=["./images/0.gif","./images/1.gif","./images/2.gif","./images/3.gi
            
            console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
            }   
+          //First condition for end of game
           else if(i>=quest.length){
               //console.log("not happy");
               //could create array of elements and replace code with "for" loop
-            Aside.innerHTML="";
-            quizForm.innerHTML="";
-            BTN.innerHTML="";
-            Title.innerHTML="";
-            question.innerHTML="";     
-            P.appendChild(text);
-            Main.appendChild(P); 
             game=false;
-
-            console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
-
+            gameover();
           } 
-            
-          else if(timeleft<=0){
-              //console.log("not happy");
-              //could create array of elements and replace code with "for" loop
-            Aside.innerHTML="";
-            quizForm.innerHTML="";
-            BTN.innerHTML="";
-            Title.innerHTML="";
-            question.innerHTML="";     
-            P.appendChild(text);
-            Main.appendChild(P); 
-            game=false;
+         
 
-            console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
+          
+          
 
-          }  
-      
+    });
+                 });   
+                 
 
-        });
-
+     //function that clears section of website and displays results when game is over
+        function gameover(){
+             Aside.innerHTML="";
+             quizForm.innerHTML="";
+             BTN.innerHTML="";
+             Title.innerHTML="";
+             question.innerHTML="";     
+             P.appendChild(text);
+             Main.appendChild(P); 
+             game=false;
+             console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
+        }
+        //timer function along with Second condition for end of game
         function timer(){
                        
                         var clock = setInterval(function(){
                         timeleft--;
-                        document.getElementById("time").textContent = "Time: "+ timeleft + " Sec";
-                        
-                        if(timeleft <= 0|| game!=true)
+                        if(timeleft>0){
+                            document.getElementById("time").textContent = "Time: "+ timeleft + " Sec";
+                        }
+                        //condition for timer to end at 0 along with wrong answer(s) causing negative clock times 
+                        if(timeleft <= 0||game!=true){
                             clearInterval(clock);
+                            gameover();
+                            document.getElementById("time").textContent = "Time: 0 Sec";
+                            
+                        }
+                        
+                            
                         },1000);
         };
         
-    });
+    
     </script>
 </body>
 </html>
 
 
-</section>
