@@ -3,6 +3,7 @@ body{
 }
 h1{
     text-decoration:underline;
+    text-shadow:2px 2px #4022e2;
 }
 span{
     color:gold;
@@ -11,6 +12,9 @@ span{
 aside{
     color:white;
 }
+main{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+}
 div{
     float:left;
 }
@@ -18,23 +22,37 @@ div{
     float:right;
     color:red;
     font-size:40px;
+    text-decoration:underline black;
+    text-shadow:2px 2px black;
 }
 #title{
     text-align: center;
-     font-size:18px;
+     font-size:40px;
+     text-decoration:underline;
+     text-shadow:2px 2px #4022e2;
 }
 
 #question{
     text-align: center;
    /* display: inline-block; */
-    font-size:18px;
+    font-size:22px;
+    color:goldenrod;
 }
 form{
     text-align:center;
+    text-shadow:2px 2px purple;
 }
-p{
+#G_Over{
     text-align:center;
     background-color:gold;
     font-size: 80px;
-    
+}
+#fPoints{
+    font-size:50px;
+    background-color:gold;
+    color:purple;
+    font-weight: bold;
+    text-decoration: underline overline red;
+    border: 10px solid black;
+    padding:10px;
 }

@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="./style.css"/>
     <title>Code Quiz</title>
 </head>
 <body>
-    <h1>Code Quiz: Basketball</h1>
+    <h1 id="h1">Code Quiz: Basketball</h1>
         <aside>
             <h2>Instructions:</h2>
             <ul>
                 <li>Answers are case-sensitive.<span> Answer </span>in proper noun form.</li>
-                <!-- <li>Choose <span>best </span>answer from selected choices</li> -->
                 <li>Finish quiz before <span>timer </span>reaches 0.</li>
-                <li>Then see what <span>This NBA great </span>does to the rim.</li>
+                <li>With a score of 100 points, see what <span>This NBA great </span>does to the rim.</li>
             </ul>     
         </aside>       
             
@@ -26,7 +24,7 @@
             <section id="button">
                 <button class="button">Start</button>
             </section>    
-            <section id="title">Quiz</section>
+            <section id="title">Quiz:</section>
             <section id="question">Question</section></br></br>
             <section id="time"></section>
             
@@ -36,118 +34,36 @@
                 <input type="text" placeholder="Who can this be?" name="answer" id="answer-text" /></br></br>
             </form>
             
-            <section><img alt="Kobe_Yao" id="gif" style="visibility:hidden"/></section>
-            <br><br><br>
+            <section id="image"><img alt="Kobe_Yao" id="gif" style="visibility:hidden"/></section>
+            <br>
         </main>
         <footer>
-            <!--put score here-->
+            <img>
         </footer>
     <!-- <script> 
-
-
-var points=24;
-            var answerInput = document.querySelector("#answer-text").value;
-
-            
-var quizForm = document.querySelector("#quiz-form");
-
-var question=document.querySelector("#question");
-           
-var quest = [
-    "Who scored 60-plus points in a game six times?",
-    "Lakers’ career leader in games, minutes, points, field goals made and attempted, 3-pointers made and attempted, free throws made and attempted, and win shares?",
-    "Who is the only NBA player to have two jerseys retired by the same team?",
-    "Who has 12-time All-Defensive team selections?",
-    "Who is a 5 time NBA Champion?"
-    ];
-           
-           
-var answer="Kobe";
-           
-var btn=document.querySelector(".button");        
-        
-        
-    
-       quiz();   
-           
-        function quiz(){
-
-                    var points=25;
-
-                 
-                   btn.addEventListener("click",function(){
-                                for(var i=0; i<quest.length; i++){
-                                    Now=quest[i];
-                                    
-                                    document.querySelector("#quiz-form").addEventListener("submit", function(event) {
-                                        event.preventDefault();
-                                        points=100;
-                                        console.log(34);
-                        
-                                        var points=27;
-                                    // When form is submitted...
-                                        if (answerInput === answer) {
-                                        
-                                        console.log(points);
-                                         points=81;
-                                        }; 
-                                       
-                   
-                                    });
-                                };
-                        
-                                    var points=26;
-                                    question.innerHTML=Now
-                                    timer();
-                    });
-        };
-                   
-        function timer(){
-                var timeleft = 30;
-                var clock = setInterval(function(){
-                timeleft--;
-                document.getElementById("time").textContent = timeleft;
-                if(timeleft <= 0)
-                    clearInterval(clock);
-                },500);
-            };
-            
-                   
-                   
-                   
-                   
-                   
-                   
-                      // Return from function early if submitted answerInput is blank
                     
-                      
-                   
-                   
-                   
                    
                       // Add new answerInput to quest array, clear the input
                      // quest.push(answerInput);
                       //todoInput.value = "";
                    
-                      // Re-render the list
-                     // renderquest();
-         
-                 
-
-        // btn.addEventListener("click",function(){
-        //   timer();
-        //     quiz;
-        // });
-           
     </script>-->
 
 
     <script>
+
+$(document).ready(function(){
+
 var Aside= document.querySelector("aside");
 var P = document.createElement("p");                     
-var text = document.createTextNode("Game Over!!");
+var textG_Over = document.createTextNode("<Game Over!!>");
+var BR = document.createElement("br"); 
+var Image=document.getElementById("image");
+var textPoints = document.createTextNode("Points: ");
 var Main=document.getElementById("main");
-
+var H1 = document.querySelector("h1"); 
+var fPoints = document.createElement("card");  
+var Footer=document.querySelector("footer")
 var BTN= document.querySelector("#button");
 var Title= document.querySelector("#title");
 var answerInput = document.querySelector("#answer-text");       
@@ -155,14 +71,17 @@ var quizForm = document.querySelector("#quiz-form");
 var question=document.querySelector("#question");   
 var GIF=document.querySelector("#gif");        
 var answer="Kobe";           
-var btn=document.querySelector(".button");   
+var btn=document.querySelector(".button");
+var IMG=document.querySelector("img");
 var ans;
 var game=true;
-var time=true;
-var points=0;
+//var time=true;
+var answeredCorrect=0;
 //Gametime(seconds)
 var timeleft = 60;
+var Score=0;
 var i=1;
+
 var quest = [
     "1.) Who scored 60-plus points in a game six times?",
     "2.) Lakers’ career leader in games, minutes, points, field goals made and attempted, 3-pointers made and attempted, free throws made and attempted, and win shares?",
@@ -171,17 +90,19 @@ var quest = [
     "5.) Who is a 5 time NBA Champion?"
     ];
 
-var Kobe_dunk=["./images/0.gif","./images/1.gif","./images/2.gif","./images/3.gif","./images/4.gif","./images/5.gif","./images/6.gif","./images/7.gif",".images/8.gif","./images/9.gif","./images/10.gif",
-                "./images/11.gif","./images/12.gif","./images/13.gif","./images/14.gif","./images/15.gif","./images/16.gif","./images/17.gif","./images/18.gif","./images/19.gif","./images/20.gif",
-                "./images/21.gif","./images/22.gif","./images/23.gif","./images/24.gif","./images/25.gif","./images/26.gif","./images/27.gif","./images/28.gif","./images/29.gif","./images/30.gif",
-                "./images/31.gif","./images/32.gif","./images/33.gif","./images/34.gif","./images/35.gif","./images/36.gif","./images/37.gif","./images/38.gif","./images/39.gif","./images/40.gif",
-                "./images/41.gif","./images/42.gif","./images/43.gif","./images/44.gif","./images/45.gif","./images/46.gif","./images/47.gif","./images/48.gif","./images/49.gif","./images/50.gif",
-                "./images/51.gif","./images/52.gif","./images/53.gif","./images/54.gif","./images/55.gif"
-            ];
+// var Kobe_dunk=["./images/0.gif","./images/1.gif","./images/2.gif","./images/3.gif","./images/4.gif","./images/5.gif","./images/6.gif","./images/7.gif",".images/8.gif","./images/9.gif","./images/10.gif",
+//                 "./images/11.gif","./images/12.gif","./images/13.gif","./images/14.gif","./images/15.gif","./images/16.gif","./images/17.gif","./images/18.gif","./images/19.gif","./images/20.gif",
+//                 "./images/21.gif","./images/22.gif","./images/23.gif","./images/24.gif","./images/25.gif","./images/26.gif","./images/27.gif","./images/28.gif","./images/29.gif","./images/30.gif",
+//                 "./images/31.gif","./images/32.gif","./images/33.gif","./images/34.gif","./images/35.gif","./images/36.gif","./images/37.gif","./images/38.gif","./images/39.gif","./images/40.gif",
+//                 "./images/41.gif","./images/42.gif","./images/43.gif","./images/44.gif","./images/45.gif","./images/46.gif","./images/47.gif","./images/48.gif","./images/49.gif","./images/50.gif",
+//                 "./images/51.gif","./images/52.gif","./images/53.gif","./images/54.gif","./images/55.gif"
+//             ];
 
-
+answerInput.value="";
+console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
      //Game start click       
     btn.addEventListener("click",function(){
+        console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
         question.innerHTML=quest[0];
         timer();
         //when answer is submitted(clicked)
@@ -200,16 +121,34 @@ var Kobe_dunk=["./images/0.gif","./images/1.gif","./images/2.gif","./images/3.gi
           answerText = "";
       
           
-          console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
+          console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
         
 
-          
-          
-          //Correct answer
-            if(ans===answer && i<quest.length){
-                points++;
+         //Correct answer when final question
+           if(ans===answer && i===quest.length){
+            answeredCorrect++;
+            i++;
+            console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
+            Score=(answeredCorrect*20)+(timeleft);
+            game=false;
+            gameover();
+            Win();
+          }
+          //Wrong answer when final question
+          else if(ans!==answer && i===quest.length){
+            timeleft=timeleft-5;
+            i++;
+            Score=(points*20)+(timeleft);
+            console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
+            game=false;
+            gameover();
+            Win();
+          }
+          //Correct answer when NOT final question
+            else if(ans===answer && i<quest.length){
+                answeredCorrect++;
                 question.innerHTML=quest[i++];
-                console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
+                console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
                 answerInput.value =""; 
              
 
@@ -285,32 +224,24 @@ var Kobe_dunk=["./images/0.gif","./images/1.gif","./images/2.gif","./images/3.gi
                             //         });
                             //     }
                             //   }
+
+            //Closing bracket for correct answer statement                
             }
 
-          //Wrong answer
+          //Wrong answer when NOT final question
           else if(ans!==answer && i<quest.length){
               question.innerHTML=quest[i++];
               
               answerInput.value="";
               timeleft=timeleft-5;
            
-           console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
+           console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
            }   
-          //First condition for end of game
-          else if(i>=quest.length){
-              //console.log("not happy");
-              //could create array of elements and replace code with "for" loop
-            game=false;
-            gameover();
-          } 
-         
 
-          
-          
-
+    //Closing bracket for enter on input answer      
     });
+                //Closing bracket for start of game
                  });   
-                 
 
      //function that clears section of website and displays results when game is over
         function gameover(){
@@ -319,12 +250,37 @@ var Kobe_dunk=["./images/0.gif","./images/1.gif","./images/2.gif","./images/3.gi
              BTN.innerHTML="";
              Title.innerHTML="";
              question.innerHTML="";     
-             P.appendChild(text);
-             Main.appendChild(P); 
-             game=false;
-             console.log("points= "+ points +", i= "+ i +", timeleft= "+ timeleft);
+             P.appendChild(textG_Over);
+             Main.appendChild(P);
+             P.setAttribute("id","G_Over");
+            //inside h1
+            // var H1=document.getElementById("h1");
+            var Hed=document.querySelector("h1");
+            Hed.setAttribute("style", "text-shadow: 2px 2px red");
+
+             //inside footer element
+             fPoints.innerHTML = "Score= " + Score + " points || Correct Answers= " + answeredCorrect; 
+             Footer.appendChild(fPoints);
+             fPoints.setAttribute("id","fPoints");
+            
+             console.log("score: "+Score+"   correct answers= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
         }
-        //timer function along with Second condition for end of game
+        //Prize function
+        function Win(){
+            if(Score>=100){
+                IMG.setAttribute("style", "visibility:visible; border:8px solid gold");
+            IMG.setAttribute("src", "./images/KobeDunksOnYao.gif");
+            }
+            var BR = document.createElement("br");
+            var P=document.createElement("p");
+            Image.append(BR);
+            P.innerHTML="&#169;"+"NBA";
+            BR.parentNode.insertBefore( P, BR.nextSibling );;
+            
+
+        }
+
+        //timer function
         function timer(){
                        
                         var clock = setInterval(function(){
@@ -332,19 +288,24 @@ var Kobe_dunk=["./images/0.gif","./images/1.gif","./images/2.gif","./images/3.gi
                         if(timeleft>0){
                             document.getElementById("time").textContent = "Time: "+ timeleft + " Sec";
                         }
+                        //Third condition for end of game
                         //condition for timer to end at 0 along with wrong answer(s) causing negative clock times 
-                        if(timeleft <= 0||game!=true){
+                        if(timeleft <= 0){
                             clearInterval(clock);
                             gameover();
                             document.getElementById("time").textContent = "Time: 0 Sec";
                             
                         }
-                        
+
+                        if (game!=true){
+                            clearInterval(clock);
+                            document.getElementById("time").textContent = "Time: "+ timeleft + " Sec";
+                        }
                             
                         },1000);
         };
         
-    
+});    
     </script>
 </body>
 </html>
