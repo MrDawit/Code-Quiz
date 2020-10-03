@@ -21,7 +21,7 @@ After the quiz starts, a countdown (60 sec) is started. There are five questions
 ## Notes:
 * changed prompt to card that get rewritten and answer points get saved
 * convert array to object
-* have background change to kobe getting closer to dunk after correct questions
+* have background change to Kobe getting closer to dunk after individual correct answers
 
 
 ## Created By:
