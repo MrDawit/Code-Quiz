@@ -15,6 +15,7 @@ After the quiz starts, a countdown (60 sec) is started. There are five questions
 * BOOTSTRAP 
 * JAVASCRIPT
 * JQUERY
+* HTML DOM
 * localStorage API
 
 
