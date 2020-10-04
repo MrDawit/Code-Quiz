@@ -42,6 +42,9 @@ form{
     text-align:center;
     text-shadow:2px 2px purple;
 }
+label{
+    font-size:24px;
+}
 #G_Over{
     text-align:center;
     background-color:gold;
@@ -55,4 +58,23 @@ form{
     text-decoration: underline overline red;
     border: 10px solid black;
     padding:10px;
+}
+#lose{
+    background-color:darkred;
+    color:yellow;
+    float:left;
+    font-size:40px;
+}
+#save{
+    padding-top:80px;
+    border:solid black;
+    background-color:white;
+    text-align: center;
+
+}
+
+h3{
+    color:indigo;
+    font-weight: bold;
+    text-decoration: underline;
 }

@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <link rel="stylesheet" type="text/css" href="./style.css"/>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
     <title>Code Quiz</title>
 </head>
+
 <body>
     <h1 id="h1">Code Quiz: Basketball</h1>
-        <aside>
-            <h2>Instructions:</h2>
-            <ul>
-                <li>Answers are case-sensitive.<span> Answer </span>in proper noun form.</li>
-                <li>Finish quiz before <span>timer </span>reaches 0.</li>
-                <li>With a score of 100 points, see what <span>This NBA great </span>does to the rim.</li>
-            </ul>     
-        </aside>       
-            
-        
-        <main id="main">
-            <section id="button">
-                <button class="button">Start</button>
-            </section>    
-            <section id="title">Quiz:</section>
-            <section id="question">Question</section></br></br>
-            <section id="time"></section>
-            
-            <form id="quiz-form" method="POST">
-                
-                <label for="answerT">Input Answer:</label></br>
-                <input type="text" placeholder="Who can this be?" name="answer" id="answer-text" /></br></br>
-            </form>
-            
-            <section id="image"><img alt="Kobe_Yao" id="gif" style="visibility:hidden"/></section>
-            <br>
-        </main>
-        <footer>
-            <img>
-        </footer>
+    <aside>
+        <h2>Instructions:</h2>
+        <ul>
+            <li>Answers are case-sensitive.<span> Answer </span>in proper noun form.</li>
+            <li>This player is mainly know on a <span>first name</span> basis (Answers should only use first name).</li>
+            <li>Finish quiz before <span>timer </span>reaches 0.</li>
+            <li>With a score of 100 points, see what <span>This NBA great </span>does to the rim.</li>
+        </ul>
+    </aside>
+
+
+    <main id="main">
+        <section id="button">
+            <button class="button">Start</button>
+        </section>
+        <section id="title">Quiz:</section>
+        <section id="question">Question</section></br></br>
+        <section id="time"></section>
+
+        <form id="quiz-form" method="POST">
+
+            <label for="answerT">Input Answer:</label></br>
+            <input type="text" placeholder="Who can this be?" name="answer" id="answer-text" /></br></br>
+        </form>
+
+        <section id="image"><img alt="Kobe_Yao" id="gif" style="visibility:hidden" /></section>
+        <br>
+    </main>
+    <footer>
+    </footer>
     <!-- <script> 
                     
                    
@@ -52,262 +54,442 @@
 
     <script>
 
-$(document).ready(function(){
+        $(document).ready(function () {
 
-var Aside= document.querySelector("aside");
-var P = document.createElement("p");                     
-var textG_Over = document.createTextNode("<Game Over!!>");
-var BR = document.createElement("br"); 
-var Image=document.getElementById("image");
-var textPoints = document.createTextNode("Points: ");
-var Main=document.getElementById("main");
-var H1 = document.querySelector("h1"); 
-var fPoints = document.createElement("card");  
-var Footer=document.querySelector("footer")
-var BTN= document.querySelector("#button");
-var Title= document.querySelector("#title");
-var answerInput = document.querySelector("#answer-text");       
-var quizForm = document.querySelector("#quiz-form");
-var question=document.querySelector("#question");   
-var GIF=document.querySelector("#gif");        
-var answer="Kobe";           
-var btn=document.querySelector(".button");
-var IMG=document.querySelector("img");
-var ans;
-var game=true;
-//var time=true;
-var answeredCorrect=0;
-//Gametime(seconds)
-var timeleft = 60;
-var Score=0;
-var i=1;
-
-var quest = [
-    "1.) Who scored 60-plus points in a game six times?",
-    "2.) Lakers’ career leader in games, minutes, points, field goals made and attempted, 3-pointers made and attempted, free throws made and attempted, and win shares?",
-    "3.) Who is the only NBA player to have two jerseys retired by the same team?",
-    "4.) Who has 12-time All-Defensive team selections?",
-    "5.) Who is a 5 time NBA Champion?"
-    ];
-
-// var Kobe_dunk=["./images/0.gif","./images/1.gif","./images/2.gif","./images/3.gif","./images/4.gif","./images/5.gif","./images/6.gif","./images/7.gif",".images/8.gif","./images/9.gif","./images/10.gif",
-//                 "./images/11.gif","./images/12.gif","./images/13.gif","./images/14.gif","./images/15.gif","./images/16.gif","./images/17.gif","./images/18.gif","./images/19.gif","./images/20.gif",
-//                 "./images/21.gif","./images/22.gif","./images/23.gif","./images/24.gif","./images/25.gif","./images/26.gif","./images/27.gif","./images/28.gif","./images/29.gif","./images/30.gif",
-//                 "./images/31.gif","./images/32.gif","./images/33.gif","./images/34.gif","./images/35.gif","./images/36.gif","./images/37.gif","./images/38.gif","./images/39.gif","./images/40.gif",
-//                 "./images/41.gif","./images/42.gif","./images/43.gif","./images/44.gif","./images/45.gif","./images/46.gif","./images/47.gif","./images/48.gif","./images/49.gif","./images/50.gif",
-//                 "./images/51.gif","./images/52.gif","./images/53.gif","./images/54.gif","./images/55.gif"
-//             ];
-
-answerInput.value="";
-console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
-     //Game start click       
-    btn.addEventListener("click",function(){
-        console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
-        question.innerHTML=quest[0];
-        timer();
-        //when answer is submitted(clicked)
-        quizForm.addEventListener("submit", function(event) {
-          event.preventDefault();
-        
-          var answerText = answerInput.value;
-          
-          // Return from function early if submitted text is blank
-          if (answerText === "") {
-            return;
-          }
-      
-          // Add new value to var ans. clear the input
-          ans=answerText;
-          answerText = "";
-      
-          
-          console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
-        
-
-         //Correct answer when final question
-           if(ans===answer && i===quest.length){
-            answeredCorrect++;
-            i++;
-            console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
-            Score=(answeredCorrect*20)+(timeleft);
-            game=false;
-            gameover();
-            Win();
-          }
-          //Wrong answer when final question
-          else if(ans!==answer && i===quest.length){
-            timeleft=timeleft-5;
-            i++;
-            Score=(points*20)+(timeleft);
-            console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
-            game=false;
-            gameover();
-            Win();
-          }
-          //Correct answer when NOT final question
-            else if(ans===answer && i<quest.length){
-                answeredCorrect++;
-                question.innerHTML=quest[i++];
-                console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
-                answerInput.value =""; 
-             
-
-                    //tried to have gif array play in sections with every correct answer[DOESNT WORK]
-                           
-                            //  if(i=1){
-                            //     for(a=0;a<10;a++){
-                            //      (function(){
-                            //      setInterval(function(){
-                            //      GIF.setAttribute("src",Kobe_dunk[a]);
-                            //      GIF.style.visibility="visible";
-                            //      console.log("a= "+ a + "  i= "+ );
-                            //      },500)
-                            //      });
-                            //     }
-                            //  }
-                         
-                            //  if(i=2){
-                            //     for(a=10;a<20;a++){
-                            //         (function(){
-                            //         setInterval(function(){
-                            //         GIF.setAttribute("src",Kobe_dunk[a]);
-                            //         GIF.style.visibility="visible";
-                            //         console.log("a= "+ a + "  i= "+ );
-                            //         },500)
-                            //         });
-                            //     }
-                            //  }
-                         
-                            //  if(i=3){
-                            //     for(a=20;a<30;a++){
-                            //         (function(){
-                            //         setInterval(function(){
-                            //         GIF.setAttribute("src",Kobe_dunk[a]);
-                            //         GIF.style.visibility="visible";
-                            //         console.log("a= "+ a + "  i= "+ );
-                            //         },500)
-                            //         });
-                            //     }
-                            //  }
-                         
-                            //  if(i=4){
-                            //     for(a=30;a<40;a++){
-                            //         (function(){
-                            //         setInterval(function(){
-                            //         GIF.setAttribute("src",Kobe_dunk[a]);
-                            //         GIF.style.visibility="visible";
-                            //         console.log("a= "+ a + "  i= "+ );
-                            //         },500)
-                            //         });
-                            //     }
-                            //  }
-                         
-                            //  if(i=5){
-                            //     for(a=40;a<50;a++){
-                            //         (function(){
-                            //         setInterval(function(){
-                            //         GIF.setAttribute("src",Kobe_dunk[a]);
-                            //         GIF.style.visibility="visible";
-                            //         console.log("a= "+ a + "  i= "+ );
-                            //         },500)
-                            //         });
-                            //      }
-                            //  }
-                            //   if(i=6){
-                            //     for(a=50;a<56;a++){
-                            //         (function(){
-                            //         setInterval(function(){
-                            //         GIF.setAttribute("src",Kobe_dunk[a]);
-                            //         GIF.style.visibility="visible";
-                            //         console.log("a= "+ a + "  i= "+ );
-                            //         },500)
-                            //         });
-                            //     }
-                            //   }
-
-            //Closing bracket for correct answer statement                
-            }
-
-          //Wrong answer when NOT final question
-          else if(ans!==answer && i<quest.length){
-              question.innerHTML=quest[i++];
-              
-              answerInput.value="";
-              timeleft=timeleft-5;
-           
-           console.log("points= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
-           }   
-
-    //Closing bracket for enter on input answer      
-    });
-                //Closing bracket for start of game
-                 });   
-
-     //function that clears section of website and displays results when game is over
-        function gameover(){
-             Aside.innerHTML="";
-             quizForm.innerHTML="";
-             BTN.innerHTML="";
-             Title.innerHTML="";
-             question.innerHTML="";     
-             P.appendChild(textG_Over);
-             Main.appendChild(P);
-             P.setAttribute("id","G_Over");
-            //inside h1
-            // var H1=document.getElementById("h1");
-            var Hed=document.querySelector("h1");
-            Hed.setAttribute("style", "text-shadow: 2px 2px red");
-
-             //inside footer element
-             fPoints.innerHTML = "Score= " + Score + " points || Correct Answers= " + answeredCorrect; 
-             Footer.appendChild(fPoints);
-             fPoints.setAttribute("id","fPoints");
-            
-             console.log("score: "+Score+"   correct answers= "+ answeredCorrect +", i= "+ i +", timeleft= "+ timeleft);
-        }
-        //Prize function
-        function Win(){
-            if(Score>=100){
-                IMG.setAttribute("style", "visibility:visible; border:8px solid gold");
-            IMG.setAttribute("src", "./images/KobeDunksOnYao.gif");
-            }
+            var Aside = document.querySelector("aside");
+            var P = document.createElement("p");
+            var textG_Over = document.createTextNode("<Game Over!!>");
             var BR = document.createElement("br");
-            var P=document.createElement("p");
-            Image.append(BR);
-            P.innerHTML="&#169;"+"NBA";
-            BR.parentNode.insertBefore( P, BR.nextSibling );;
-            
+            var Image = document.getElementById("image");
+            var textPoints = document.createTextNode("Points: ");
+            var Main = document.getElementById("main");
+            var H1 = document.querySelector("h1");
+            var fPoints = document.createElement("card");
+            var Footer = document.querySelector("footer")
+            var BTN = document.querySelector("#button");
+            var Title = document.querySelector("#title");
+            var answerInput = document.querySelector("#answer-text");
+            var quizForm = document.querySelector("#quiz-form");
+            var question = document.querySelector("#question");
+            var GIF = document.querySelector("#gif");
+            var answer = "Kobe";
+            var btn = document.querySelector(".button");
+            var IMG = document.querySelector("img");
+            var ans;
+            var game = true;
+            //var time=true;
+            var answeredCorrect = 0;
+            //Gametime(seconds)
+            var timeleft = 60;
+            var Score = 0;
+            var i = 1;
 
-        }
+            var quest = [
+                "1.) Who scored 60-plus points in a game six times?",
+                "2.) Lakers’ career leader in games, minutes, points, field goals made and attempted, 3-pointers made and attempted, free throws made and attempted, and win shares?",
+                "3.) Who is the only NBA player to have two jerseys retired by the same team?",
+                "4.) Who has 12-time All-Defensive team selections?",
+                "5.) Who is a 5 time NBA Champion?"
+            ];
 
-        //timer function
-        function timer(){
-                       
-                        var clock = setInterval(function(){
-                        timeleft--;
-                        if(timeleft>0){
-                            document.getElementById("time").textContent = "Time: "+ timeleft + " Sec";
-                        }
-                        //Third condition for end of game
-                        //condition for timer to end at 0 along with wrong answer(s) causing negative clock times 
-                        if(timeleft <= 0){
-                            clearInterval(clock);
-                            gameover();
-                            document.getElementById("time").textContent = "Time: 0 Sec";
-                            
-                        }
+            // var Kobe_dunk=["./images/0.gif","./images/1.gif","./images/2.gif","./images/3.gif","./images/4.gif","./images/5.gif","./images/6.gif","./images/7.gif",".images/8.gif","./images/9.gif","./images/10.gif",
+            //                 "./images/11.gif","./images/12.gif","./images/13.gif","./images/14.gif","./images/15.gif","./images/16.gif","./images/17.gif","./images/18.gif","./images/19.gif","./images/20.gif",
+            //                 "./images/21.gif","./images/22.gif","./images/23.gif","./images/24.gif","./images/25.gif","./images/26.gif","./images/27.gif","./images/28.gif","./images/29.gif","./images/30.gif",
+            //                 "./images/31.gif","./images/32.gif","./images/33.gif","./images/34.gif","./images/35.gif","./images/36.gif","./images/37.gif","./images/38.gif","./images/39.gif","./images/40.gif",
+            //                 "./images/41.gif","./images/42.gif","./images/43.gif","./images/44.gif","./images/45.gif","./images/46.gif","./images/47.gif","./images/48.gif","./images/49.gif","./images/50.gif",
+            //                 "./images/51.gif","./images/52.gif","./images/53.gif","./images/54.gif","./images/55.gif"
+            //             ];
 
-                        if (game!=true){
-                            clearInterval(clock);
-                            document.getElementById("time").textContent = "Time: "+ timeleft + " Sec";
-                        }
-                            
-                        },1000);
-        };
+            answerInput.value = "";
+            console.log("points= " + answeredCorrect + ", i= " + i + ", timeleft= " + timeleft);
+            //Game start click       
+            btn.addEventListener("click", function () {
+                console.log("points= " + answeredCorrect + ", i= " + i + ", timeleft= " + timeleft);
+                question.innerHTML = quest[0];
+                timer();
+                //when answer is submitted(clicked)
+                quizForm.addEventListener("submit", function (event) {
+                    event.preventDefault();
+
+                    var answerText = answerInput.value;
+
+                    // Return from function early if submitted text is blank
+                    if (answerText === "") {
+                        return;
+                    }
+
+                    // Add new value to var ans. clear the input
+                    ans = answerText;
+                    answerText = "";
+
+
+                    console.log("points= " + answeredCorrect + ", i= " + i + ", timeleft= " + timeleft);
+
+
+                    //Correct answer when final question
+                    if (ans === answer && i === quest.length) {
+                        answeredCorrect++;
+                        i++;
+                        console.log("points= " + answeredCorrect + ", i= " + i + ", timeleft= " + timeleft);
+                        Score = (answeredCorrect * 20) + (timeleft);
+                        game = false;
+                        gameover();
+                        Win();
+                        return(Score);
+
+                    }
+                    //Wrong answer when final question
+                    else if (ans !== answer && i === quest.length) {
+                        timeleft = timeleft - 5;
+                        i++;
+                        Score = (answeredCorrect * 20) + (timeleft);
+                        console.log("points= " + answeredCorrect + ", i= " + i + ", timeleft= " + timeleft);
+                        game = false;
+                        gameover();
+                        Win();
+                        return(Score);
+                    }
+                    //Correct answer when NOT final question
+                    else if (ans === answer && i < quest.length) {
+                        answeredCorrect++;
+                        question.innerHTML = quest[i++];
+                        console.log("points= " + answeredCorrect + ", i= " + i + ", timeleft= " + timeleft);
+                        answerInput.value = "";
+
+
+                        //tried to have gif array play in sections with every correct answer[DOESNT WORK]
+
+                        //  if(i=1){
+                        //     for(a=0;a<10;a++){
+                        //      (function(){
+                        //      setInterval(function(){
+                        //      GIF.setAttribute("src",Kobe_dunk[a]);
+                        //      GIF.style.visibility="visible";
+                        //      console.log("a= "+ a + "  i= "+ );
+                        //      },500)
+                        //      });
+                        //     }
+                        //  }
+
+                        //  if(i=2){
+                        //     for(a=10;a<20;a++){
+                        //         (function(){
+                        //         setInterval(function(){
+                        //         GIF.setAttribute("src",Kobe_dunk[a]);
+                        //         GIF.style.visibility="visible";
+                        //         console.log("a= "+ a + "  i= "+ );
+                        //         },500)
+                        //         });
+                        //     }
+                        //  }
+
+                        //  if(i=3){
+                        //     for(a=20;a<30;a++){
+                        //         (function(){
+                        //         setInterval(function(){
+                        //         GIF.setAttribute("src",Kobe_dunk[a]);
+                        //         GIF.style.visibility="visible";
+                        //         console.log("a= "+ a + "  i= "+ );
+                        //         },500)
+                        //         });
+                        //     }
+                        //  }
+
+                        //  if(i=4){
+                        //     for(a=30;a<40;a++){
+                        //         (function(){
+                        //         setInterval(function(){
+                        //         GIF.setAttribute("src",Kobe_dunk[a]);
+                        //         GIF.style.visibility="visible";
+                        //         console.log("a= "+ a + "  i= "+ );
+                        //         },500)
+                        //         });
+                        //     }
+                        //  }
+
+                        //  if(i=5){
+                        //     for(a=40;a<50;a++){
+                        //         (function(){
+                        //         setInterval(function(){
+                        //         GIF.setAttribute("src",Kobe_dunk[a]);
+                        //         GIF.style.visibility="visible";
+                        //         console.log("a= "+ a + "  i= "+ );
+                        //         },500)
+                        //         });
+                        //      }
+                        //  }
+                        //   if(i=6){
+                        //     for(a=50;a<56;a++){
+                        //         (function(){
+                        //         setInterval(function(){
+                        //         GIF.setAttribute("src",Kobe_dunk[a]);
+                        //         GIF.style.visibility="visible";
+                        //         console.log("a= "+ a + "  i= "+ );
+                        //         },500)
+                        //         });
+                        //     }
+                        //   }
+
+                        //Closing bracket for correct answer statement                
+                    }
+
+                    //Wrong answer when NOT final question
+                    else if (ans !== answer && i < quest.length) {
+                        question.innerHTML = quest[i++];
+
+                        answerInput.value = "";
+                        timeleft = timeleft - 5;
+
+                        console.log("points= " + answeredCorrect + ", i= " + i + ", timeleft= " + timeleft);
+                    }
+
+                    //Closing bracket for enter on input answer      
+                });
+                //Closing bracket for start of game
+            });
+
+            //function that clears section of website and displays results when game is over
+            function gameover() {
+                Aside.innerHTML = "";
+                quizForm.innerHTML = "";
+                BTN.innerHTML = "";
+                Title.innerHTML = "";
+                question.innerHTML = "";
+                //inside main (last element before footer),,,, create parent section for g_over 
+                P.appendChild(textG_Over);
+                Main.appendChild(P);
+                P.setAttribute("id", "G_Over");
+                //inside h1
+                // var H1=document.getElementById("h1");
+                var Hed = document.querySelector("h1");
+                Hed.setAttribute("style", "text-shadow: 2px 2px red");
+
+                //inside footer element
+                fPoints.innerHTML = "Score= " + Score + " points || Correct Answers= " + answeredCorrect;
+                Footer.appendChild(fPoints);
+                fPoints.setAttribute("id", "fPoints");
+                console.log("score: " + Score + "   correct answers= " + answeredCorrect + ", i= " + i + ", timeleft= " + timeleft);
+                var section = document.createElement("section");
+                    section.setAttribute("id", "save");
+                    var par = document.createElement("p");
+                  //  par.innerHTML = "Name: " + localStorage.getItem("Name") + ", Score: " + localStorage.getItem("Score");
+                    section.append(par);
+                    Footer.append(section);
+                    var ahead=document.createElement("h3");
+                    ahead.innerHTML="Previous User Scores";
+                    $("#save").append(ahead);
+
+            for (var b=localStorage.length;b>0;b--){
+                 $("#save").append(localStorage["user"+b]+" <br>");
+                 };
+
+            }
+            //Prize and condolence function
+            function Win() {
+                var BR = document.createElement("br");
+                var P = document.createElement("p");
+                var Main = document.querySelector("main");
+                SaveGame();
+                //Winning   
+                if (Score >= 100) {
+                    IMG.setAttribute("style", "visibility:visible; border:8px solid gold");
+                    IMG.setAttribute("src", "./images/KobeDunksOnYao.gif");
+                    Image.append(BR);
+                    P.innerHTML = "&#169;" + "NBA";
+                    P.setAttribute("style", "color:gold");
+                    BR.parentNode.insertBefore(P, BR.nextSibling);
+
+                }//Losing
+                else {
+                    P.setAttribute("id", "lose");
+                    P.setAttribute("text-align", "center");
+                    var section = document.createElement("section");
+                    section.setAttribute("id", "tryAgain");
+                    Footer.append(section);
+                    P.innerHTML = "TRY AGAIN,....IT'S REALLY NOT THAT HARD.";
+                    section.append(P);
+                    Main.append(BR);
+
+                }
+            }
+
+            //function for saving score and itials(or name) to local storage
+            function SaveGame() {
+
+                var input = document.createElement("input");
+                quizForm.innerHTML = "<label>Leave Initials or Name:</label>";
+                quizForm.append(input);
+                input.setAttribute("id", "saveName");
+                var saveName = document.querySelector("#saveName");
+
+                quizForm.addEventListener("submit", function (event) {
+                    event.preventDefault();
+
+                    //insert localStorage save
+                    // Store
+                    // function Storage(name, data){
+                    //         var Saved = localStorage.getItem(name);
+                    //         console.log("Saved= "+ Saved);
+                    //         if(Saved === null){ Saved = "";};
+                    //         localStorage.setItem(name, Saved + " "+data);
+                    //         console.log("Saved= "+ Saved);
+                    //     };
+                    // function Storage2(name2, data2){
+                    //         var Saved2 = localStorage.getItem(name2);
+                    //         console.log("Saved2= "+ Saved2);
+                    //         if(Saved2 === null){ Saved2 = "";};
+                    //         localStorage.setItem(name2, Saved2 + " "+data2);
+                    //         console.log("Saved2= "+ Saved2);
+                    // };
+
+                 //   Storage("Name", saveName.value);
+                  //  Storage2("Score", Score);
+
+//                     function Stora() {
+
+
+
+//                         localStorage.setItem("User", JSON.stringify(saveName.value));
+//                         localStorage.setItem("Scores", JSON.stringify(Score));
+                        
+
+//                         var GetStorage = localStorage.getItem("User");
+//                         var GetStorage2= localStorage.getItem("Scores");
+//                        return{
+//                            first: console.log("GetStorage: "+ GetStorage + GetStorage2),
+//                             second:GetStorage,
+//                             third:GetStorage2,
+//                     }
+//                     };
+//                     var values = Stora();
+// var first = values.first;
+// var second = values.second;
+// var third = values.third;
+
+// var storedArray = localStorage.getItem("userArray");
+// var userArray = [];
+// if(storedArray) {
+//     userArray = JSON.parse(storedArray);
+// }
+
+// var addUser = function(name,puntos) {
+//     var name = $("#saveName").val();
+//     var puntos = Score;
+//     userArray.push({name: name, puntos: puntos});
+//     localStorage.setItem("userArray", JSON.stringify(userArray));
+// };
+
+// var logPlayer = function() {
+//     userArray.forEach( function(element,index) {
+//         //empty input
         
-});    
+//         //append localStorage values onto ul's
+//         $("#save").append("<li>" + element.name + "</li>");
+//         $("#save").append("<li>" + element.puntos + "</li>");
+//         $("input").val("");
+//     });
+// };
+
+//var userScore=Score;
+//logPlayer();
+//addUser(userScore,userName);
+//click listPets button, call logPets function
+// $("#listPlayers").on("submit", function() {
+//     logPlayer();
+//     $("#check").html("");
+// });
+
+//click enter button, call addPet function
+
+    //addUser(name,puntos);
+   // $("#check").append("<i class='fa fa-check' aria-hidden='true'></i>");
+
+   var a=localStorage.length+1
+   localStorage.setItem("user"+a,$("input").val()+" : Score= "+Score+" Points");
+      
+                  //  par.innerHTML = "Name: " + localStorage.getItem("Name") + ", Score: " + localStorage.getItem("Score");
+                    
+                    var b=localStorage.length
+                     $("#save").prepend(localStorage["user"+b]+" <br>");
+                     var ahead=document.createElement("h3");
+                     ahead.innerHTML="Current User Score";
+                     $("#save").prepend(ahead);
+                     $("#quiz-form").remove();
+
+                    // var saveName = document.querySelector("#saveName");
+                    // var a = [saveName.value];
+//a.push(JSON.parse(localStorage.getItem(saveName.value)));
+//localStorage.setItem('Name', JSON.stringify(a));
+// function saveHighScore() {
+//   var name = prompt("Enter your name to save high score.");
+//   if (name === null){
+//   name = "undefined"
+//   };
+// var Obj = { 'Player': name, 'Score': userScore};
+// localStorage.setItem('highScores', JSON.stringify(Obj));
+//var score = ["name":name,"Score":userScore];
+//console.log("saveHighScore -> score", userScore)
+//localStorage.setItem("highScores",JSON.stringify(score))
+// resultBox.style.display="none";
+// init(); //INIT WILL BLOW OUT THE CURRENT SCORE
+// }
+  //  return;
+//}
+//SaveDataToLocalStorage(saveName.value);
+
+                    console.log("name= " + saveName.value + ", score= " + Score);
+                    console.log("localStorage: " + localStorage);
+                    // Retrieve
+              
+// var a=[];
+// localStorage.setItem('user', JSON.stringify(user));
+
+// //Then to retrieve it from the store and convert to an object again:
+
+// var user = JSON.parse(localStorage.getItem('user'));
+
+
+
+                });
+
+            }
+
+
+            //timer function
+            function timer() {
+
+                var clock = setInterval(function () {
+                    timeleft--;
+                    if (timeleft > 0) {
+                        document.getElementById("time").textContent = "Time: " + timeleft + " Sec";
+                    }
+                    //Third condition for end of game
+                    //condition for timer to end at 0 along with wrong answer(s) causing negative clock times 
+                    if (timeleft <= 0) {
+                        clearInterval(clock);
+                        gameover();
+                        document.getElementById("time").textContent = "Time: 0 Sec";
+
+                    }
+
+                    if (game != true) {
+                        clearInterval(clock);
+                        document.getElementById("time").textContent = "Time: " + timeleft + " Sec";
+                    }
+
+                }, 1000);
+            };
+
+
+        });
+
+
+                // localStorage.setItem("User", JSON.stringify(User));
+
+                // var GetStorage = localStorage.getItem("User");
+                // console.log("GetStorage: ", JSON.parse(GetStorage));
+
     </script>
 </body>
+
 </html>
-
-
