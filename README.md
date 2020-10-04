@@ -8,6 +8,9 @@ After the quiz starts, a countdown (60 sec) is started. There are five questions
 * index.html
 * style.css
 * Readme.md
+* code-quiz.gif
+* prize gif
+* images broken down from prize gif(for future edit)
 
 ## Technologies Used:
 * HTML
@@ -20,7 +23,7 @@ After the quiz starts, a countdown (60 sec) is started. There are five questions
 
 
 ## Notes:
-* changed prompt to card that get rewritten and answer points get saved
+* changed prompt to card that gets rewritten and answered points get saved
 * convert array to object
 * have background change to Kobe getting closer to dunk after individual correct answers
 
