@@ -8,7 +8,7 @@ $(document).ready(function () {
     var Main = document.getElementById("main");
     var H1 = document.querySelector("h1");
     var fPoints = document.createElement("card");
-    var Footer = document.querySelector("footer")
+    var PreFooter = document.querySelector("#preFooter")
     var BTN = document.querySelector("#button");
     var Title = document.querySelector("#title");
     var answerInput = document.querySelector("#answer-text");
@@ -100,16 +100,16 @@ $(document).ready(function () {
         BTN.innerHTML = "";
         Title.innerHTML = "";
         question.innerHTML = "";
-        //inside main (last element before footer),,,, create parent section for g_over 
+        //inside main (last element before prefooter),,,, create parent section for g_over 
         P.appendChild(textG_Over);
         Main.appendChild(P);
         P.setAttribute("id", "G_Over");
         //inside h1
         var Hed = document.querySelector("h1");
         Hed.setAttribute("style", "text-shadow: 2px 2px red");
-        //inside footer element
+        //inside prefooter element
         fPoints.innerHTML = "Score= " + Score + " points , Correct Answers= " + answeredCorrect;
-        Footer.appendChild(fPoints);
+        PreFooter.appendChild(fPoints);
         fPoints.setAttribute("id", "fPoints");
         DisplaySavedGames();
     }
@@ -132,7 +132,7 @@ $(document).ready(function () {
             P.setAttribute("text-align", "center");
             var section = document.createElement("section");
             section.setAttribute("id", "tryAgain");
-            Footer.append(section);
+            PreFooter.append(section);
             P.innerHTML = "TRY AGAIN,....IT'S REALLY NOT THAT HARD.";
             section.append(P);
             Main.append(BR);
@@ -172,7 +172,7 @@ $(document).ready(function () {
         par.setAttribute("id", "pSave2");
         section.append(score2header);
         section.append(par);
-        Footer.append(section);
+        PreFooter.append(section);
         for (var b = localStorage.length; b > 0; b--) {
             $("#pSave2").append(localStorage["user" + b] + " <br>");
         };
