@@ -100,7 +100,7 @@ $(document).ready(function () {
         BTN.innerHTML = "";
         Title.innerHTML = "";
         question.innerHTML = "";
-        //inside main (last element before prefooter),,,, create parent section for g_over 
+        //inside main (last element before prefooter) create parent section for g_over 
         P.appendChild(textG_Over);
         Main.appendChild(P);
         P.setAttribute("id", "G_Over");
@@ -132,7 +132,8 @@ $(document).ready(function () {
             P.setAttribute("text-align", "center");
             var section = document.createElement("section");
             section.setAttribute("id", "tryAgain");
-            PreFooter.append(section);
+            //PreFooter.append(section);
+            PreFooter.prepend(section);
             P.innerHTML = "TRY AGAIN,....IT'S REALLY NOT THAT HARD.";
             section.append(P);
             Main.append(BR);
